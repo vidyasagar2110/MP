@@ -9,38 +9,48 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
-            background-color: #f4f4f9;
+            background-color: #eef2f3;
+            margin: 0;
         }
         .container {
             max-width: 600px;
             margin: auto;
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #333;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
         p {
-            color: #666;
+            color: #34495e;
+            font-size: 16px;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
         .buttons {
-            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
         }
         .buttons a {
             text-decoration: none;
-            margin: 10px;
-            padding: 10px 20px;
-            background-color: #007BFF;
+            display: inline-block;
+            padding: 15px;
+            background-color: #3498db;
             color: white;
             border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .buttons a:hover {
-            background-color: #0056b3;
+            background-color: #2980b9;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -50,6 +60,12 @@
         <p>
             Mathematical programming is a powerful tool used to solve optimization problems. 
             It helps in finding the best possible solution to a problem within given constraints.
+        </p>
+        <p>
+            Linear Programming is a mathematical method used to optimize a specific objective, 
+            such as maximizing profit or minimizing cost, subject to a set of linear constraints. 
+            It is widely applied in areas like resource allocation, logistics, and decision-making, 
+            providing efficient solutions to complex problems.
         </p>
         <div class="buttons">
             <a href="{% url 'graphical_method' %}">Graphical Method</a>
