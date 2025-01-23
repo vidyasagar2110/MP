@@ -1,1 +1,60 @@
-<h1> Hi {{name}}, What a sudden suprise </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Programming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons a {
+            text-decoration: none;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .buttons a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Mathematical Programming</h1>
+        <p>
+            Mathematical programming is a powerful tool used to solve optimization problems. 
+            It helps in finding the best possible solution to a problem within given constraints.
+        </p>
+        <div class="buttons">
+            <a href="{% url 'graphical_method' %}">Graphical Method</a>
+            <a href="{% url 'simplex_method' %}">Simplex Method</a>
+        </div>
+    </div>
+</body>
+</html>
