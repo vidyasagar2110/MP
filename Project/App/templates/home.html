@@ -6,71 +6,118 @@
     <title>Mathematical Programming</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #34495e); /* Dark professional gradient */
+            color: #ecf0f1;
             text-align: center;
-            padding: 20px;
-            background-color: #eef2f3;
+            padding: 50px 20px;
             margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 100%;
+            backdrop-filter: blur(10px);
         }
         h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #ecf0f1;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            animation: titleAnimation 1s ease-out;
         }
         p {
-            color: #34495e;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
         .buttons {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
         }
         .buttons a {
             text-decoration: none;
-            display: inline-block;
-            padding: 15px;
-            background-color: #3498db;
-            color: white;
-            border-radius: 5px;
-            font-size: 18px;
+            padding: 15px 30px;
+            background: #1abc9c; /* Teal accent color */
+            color: #fff;
+            border-radius: 30px;
+            font-size: 1.1rem;
             font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.4s, transform 0.2s, box-shadow 0.3s;
         }
         .buttons a:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+            background: #16a085; /* Darker teal on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        /* Add subtle animation to the title */
+        @keyframes titleAnimation {
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Mathematical Programming</h1>
-        <p>
+        <h1 id="title">Welcome to Mathematical Programming</h1>
+        <p id="intro-1">
             Mathematical programming is a powerful tool used to solve optimization problems. 
             It helps in finding the best possible solution to a problem within given constraints.
         </p>
-        <p>
+        <p id="intro-2">
             Linear Programming is a mathematical method used to optimize a specific objective, 
             such as maximizing profit or minimizing cost, subject to a set of linear constraints. 
             It is widely applied in areas like resource allocation, logistics, and decision-making, 
             providing efficient solutions to complex problems.
         </p>
-        <div class="buttons">
-            <a href="{% url 'graphical_method' %}">Graphical Method</a>
-            <a href="{% url 'simplex_method' %}">Simplex Method</a>
+        <div class="buttons" id="buttons">
+            <a href="{% url 'graphical_method' %}" id="btn-1">Graphical Method</a>
+            <a href="{% url 'simplex_method' %}" id="btn-2">Simplex Method</a>
         </div>
     </div>
+
+    <script>
+        // Function to display elements line by line
+        function displayLineByLine(elements, delay) {
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = 1; // Fade in
+                }, index * delay); // Delay based on index
+            });
+        }
+
+        // Wait for the DOM to load before executing
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select all paragraphs
+            const paragraphs = [document.getElementById('intro-1'), document.getElementById('intro-2')];
+            
+            // Display paragraphs one by one
+            displayLineByLine(paragraphs, 1500);
+
+            // Display buttons after paragraphs
+            setTimeout(() => {
+                const buttons = document.getElementById('buttons');
+                buttons.style.opacity = 1; // Fade in
+                buttons.style.transform = 'translateY(0)'; // Move to original position
+            }, paragraphs.length * 1500); // Delay based on paragraph count
+        });
+    </script>
 </body>
 </html>
