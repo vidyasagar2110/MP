@@ -1,123 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathematical Programming</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #2c3e50, #34495e); /* Dark professional gradient */
-            color: #ecf0f1;
-            text-align: center;
-            padding: 50px 20px;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            max-width: 700px;
-            width: 100%;
-            backdrop-filter: blur(10px);
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #ecf0f1;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-            animation: titleAnimation 1s ease-out;
-        }
-        p {
-            font-size: 1.2rem;
-            color: #bdc3c7;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-        }
-        .buttons a {
-            text-decoration: none;
-            padding: 15px 30px;
-            background: #1abc9c; /* Teal accent color */
-            color: #fff;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: background 0.4s, transform 0.2s, box-shadow 0.3s;
-        }
-        .buttons a:hover {
-            background: #16a085; /* Darker teal on hover */
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        /* Add subtle animation to the title */
-        @keyframes titleAnimation {
-            0% { transform: translateY(-30px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1 id="title">Welcome to Mathematical Programming</h1>
-        <p id="intro-1">
-            Mathematical programming is a powerful tool used to solve optimization problems. 
-            It helps in finding the best possible solution to a problem within given constraints.
-        </p>
-        <p id="intro-2">
-            Linear Programming is a mathematical method used to optimize a specific objective, 
-            such as maximizing profit or minimizing cost, subject to a set of linear constraints. 
-            It is widely applied in areas like resource allocation, logistics, and decision-making, 
-            providing efficient solutions to complex problems.
-        </p>
-        <div class="buttons" id="buttons">
-            <a href="{% url 'graphical_method' %}" id="btn-1">Graphical Method</a>
-            <a href="{% url 'simplex_method' %}" id="btn-2">Simplex Method</a>
-        </div>
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Mathematical Programming{% endblock %}
+
+{% block content %}
+    <h1>Welcome to Mathematical Programming</h1>
+    <p class="intro-text">
+        Mathematical programming is a powerful tool used to solve optimization problems. 
+        It helps in finding the best possible solution to a problem within given constraints.
+    </p>
+    <p class="intro-text">
+        Linear Programming is a mathematical method used to optimize a specific objective, 
+        such as maximizing profit or minimizing cost, subject to a set of linear constraints. 
+        It is widely applied in areas like resource allocation, logistics, and decision-making, 
+        providing efficient solutions to complex problems.
+    </p>
+    <div class="buttons" id="buttons">
+        <a href="{% url 'graphical_method' %}" id="btn-1">Graphical Method</a>
+        <a href="{% url 'simplex_method' %}" id="btn-2">Simplex Method</a>
     </div>
-
-    <script>
-        // Function to display elements line by line
-        function displayLineByLine(elements, delay) {
-            elements.forEach((element, index) => {
-                setTimeout(() => {
-                    element.style.opacity = 1; // Fade in
-                }, index * delay); // Delay based on index
-            });
-        }
-
-        // Wait for the DOM to load before executing
-        document.addEventListener('DOMContentLoaded', () => {
-            // Select all paragraphs
-            const paragraphs = [document.getElementById('intro-1'), document.getElementById('intro-2')];
-            
-            // Display paragraphs one by one
-            displayLineByLine(paragraphs, 1500);
-
-            // Display buttons after paragraphs
-            setTimeout(() => {
-                const buttons = document.getElementById('buttons');
-                buttons.style.opacity = 1; // Fade in
-                buttons.style.transform = 'translateY(0)'; // Move to original position
-            }, paragraphs.length * 1500); // Delay based on paragraph count
-        });
-    </script>
-</body>
-</html>
+{% endblock %}

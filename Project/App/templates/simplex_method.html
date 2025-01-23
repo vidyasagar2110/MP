@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simplex Method</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Simplex Method{% endblock %}
+
+{% block content %}
     <h1>Simplex Method</h1>
-    <p>This page will provide solutions using the Simplex Method for linear programming problems.</p>
-    <a href="{% url 'home' %}">Back to Home</a>
-</body>
-</html>
+    <p class="intro-text">
+        The Simplex Method is an efficient algorithm used to solve linear programming problems with more than two variables.
+    </p>
+    <p class="intro-text">
+        Unlike the graphical method, which is limited to two-dimensional problems, the simplex method iteratively moves along
+        the edges of the feasible region to find the optimal solution.
+    </p>
+    <div class="buttons" id="buttons">
+        <a href="{% url 'simplex_steps' %}">Steps to Solve</a>
+        <a href="{% url 'simplex_solve' %}">Solve Problem</a>
+        <a href="{% url 'simplex_application' %}">Applications</a> <!-- Add this line -->
+    </div>
+{% endblock %}

@@ -3,6 +3,13 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('graphical-method/', views.graphical_method, name='graphical_method'),
-    path('simplex-method/', views.simplex_method, name='simplex_method'),
+    path('graphical/', views.graphical_method, name='graphical_method'),
+    path('graphical/steps/', views.graphical_steps, name='graphical_steps'),
+    path('graphical/solve/', views.graphical_solve, name='graphical_solve'),
+    path('graphical/application/', views.graphical_application, name='graphical_application'),
+    
+    path('simplex/', views.simplex_method, name='simplex_method'),
+    path('simplex/steps/', views.simplex_steps, name='simplex_steps'),
+    path('simplex/solve/', views.simplex_solve, name='simplex_solve'),
+    path('simplex/application/', views.simplex_application, name='simplex_application'),
 ]
