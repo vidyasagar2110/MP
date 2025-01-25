@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import numpy as np
 def home(request):
     return render(request, 'home.html')
 
@@ -26,8 +26,6 @@ def simplex_solve(request):
 
 def simplex_application(request):
     return render(request, 'simplex_application.html')
-from django.shortcuts import render
-import numpy as np
 
 def simplex_solver(request):
     if request.method == "POST":
