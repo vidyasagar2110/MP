@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simplex Solver</title>
+    <title>Simplex Solver - Step 2</title>
 </head>
 <body>
-    <h1>Simplex Method Solver</h1>
+    <h1>Enter Coefficients and Constraints</h1>
     <form method="POST">
         {% csrf_token %}
-        <label for="num_vars">Number of Variables:</label>
-        <input type="number" id="num_vars" name="num_vars" required><br><br>
+        <input type="hidden" name="num_vars" value="{{ num_vars }}">
+        <input type="hidden" name="num_constraints" value="{{ num_constraints }}">
+        <input type="hidden" name="optimization" value="{{ optimization }}">
 
-        <label for="num_constraints">Number of Constraints:</label>
-        <input type="number" id="num_constraints" name="num_constraints" required><br><br>
+        <h3>Objective Function</h3>
+        {% for i in range num_vars %}
+            <label for="c{{ forloop.counter }}">c{{ forloop.counter }}:</label>
+            <input type="number" step="any" id="c{{ forloop.counter }}" name="c{{ forloop.counter }}" required><br>
+        {% endfor %}
 
-        <label for="optimization">Optimization:</label>
-        <select id="optimization" name="optimization">
-            <option value="maximize">Maximize</option>
-            <option value="minimize">Minimize</option>
-        </select><br><br>
+        <h3>Constraints</h3>
+        {% for i in range num_constraints %}
+            <p>Constraint {{ forloop.counter }}</p>
+            {% for j in range num_vars %}
+                <label for="a{{ forloop.counter }}_{{ j }}">a{{ forloop.counter }}_{{ j }}:</label>
+                <input type="number" step="any" id="a{{ forloop.counter }}_{{ j }}" name="a{{ forloop.counter }}_{{ j }}" required>
+            {% endfor %}
+            <label for="b{{ forloop.counter }}">b{{ forloop.counter }}:</label>
+            <input type="number" step="any" id="b{{ forloop.counter }}" name="b{{ forloop.counter }}" required><br>
+        {% endfor %}
 
-        <button type="submit">Submit</button>
+        <button type="submit">Solve</button>
     </form>
 </body>
 </html>
