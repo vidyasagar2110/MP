@@ -1,2 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Solve Problem (Simplex Method){% endblock %}
+
+{% block content %}
 <h1>Solve Problem (Simplex Method)</h1>
 <p>Here, users can input data to solve a linear programming problem using the simplex method.</p>
+<div class="container">
+    <form method="post" action="{% url 'simplex_solver' %}">
+        {% csrf_token %}
+        <label for="type">Optimization Type:</label>
+        <select id="type" name="type" class="form-control">
+            <option value="maximize">Maximize</option>
+            <option value="minimize">Minimize</option>
+        </select>
+        <br>
+        <label for="variables">Number of Variables:</label>
+        <input type="number" id="variables" name="variables" class="form-control" required>
+        <br>
+        <label for="objective">Objective Function:</label>
+        <input type="text" id="objective" name="objective" class="form-control" required>
+        <br>
+        <div id="constraints">
+            <div class="constraint">
+                <label>Constraint: </label>
+                <input type="text" name="constraints" class="form-control" required>
+                <button type="button" class="btn btn-danger" onclick="removeConstraint(this)">Remove</button>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success" onclick="addConstraint()">Add Constraint</button>
+        <br>
+        <button type="submit" class="btn btn-primary">Solve</button>
+    </form>
+</div>
+
+<script>
+    function addConstraint() {
+        const constraintsDiv = document.getElementById('constraints');
+        const newConstraint = document.createElement('div');
+        newConstraint.className = 'constraint';
+        newConstraint.innerHTML = `
+            <label>Constraint: </label>
+            <input type="text" name="constraints" class="form-control" required>
+            <button type="button" class="btn btn-danger" onclick="removeConstraint(this)">Remove</button>
+        `;
+        constraintsDiv.appendChild(newConstraint);
+    }
+
+    function removeConstraint(button) {
+        const constraint = button.parentNode;
+        constraint.parentNode.removeChild(constraint);
+    }
+</script>
+{% endblock %}

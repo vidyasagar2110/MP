@@ -16,4 +16,7 @@ urlpatterns = [
     path('simplex/steps/', views.simplex_steps, name='simplex_steps'),
     path('simplex/solve/', views.simplex_solve, name='simplex_solve'),   
     path('simplex/application/', views.simplex_application, name='simplex_application'),
+     path('simplex_solve/', views.simplex_solver, name='simplex_solver'),
 ]
+
+ 

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Result{% endblock %}
+
+{% block content %}
+<h1>Optimal Solution</h1>
+<div class="container">
+    {% if error %}
+        <p>Error: {{ error }}</p>
+    {% else %}
+        <p>Solution: {{ solution }}</p>
+        <p>Optimal Value: {{ optimal_value }}</p>
+    {% endif %}
+    <a href="{% url 'simplex_solver' %}" class="btn btn-primary">Back to Solver</a>
+</div>
+{% endblock %}
