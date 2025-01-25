@@ -1,41 +1,76 @@
-def simplex_solver(request):
-    if request.method == "POST":
-        if "num_vars" in request.POST:
-            # Step 2: Render form for coefficients and constraints
-            num_vars = int(request.POST.get("num_vars"))
-            num_constraints = int(request.POST.get("num_constraints"))
-            optimization = request.POST.get("optimization")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solve Problem (Simplex Method)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
+        <h1 class="text-2xl font-bold mb-4 text-blue-600">Solve Problem (Simplex Method)</h1>
+        <p class="text-gray-700 mb-6">
+            Here, users can input data to solve a linear programming problem using the simplex method.
+        </p>
+        
+        <form method="POST" action="{% url 'simplex_solver' %}" x-data="{ num_vars: 2, constraints: [{ var1: '', var2: '' }] }">
+            {% csrf_token %}
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Number of Variables -->
+                <div>
+                    <label for="num_vars" class="block text-sm font-medium text-gray-700">Number of Variables</label>
+                    <input type="number" id="num_vars" name="num_vars" x-model="num_vars" min="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                </div>
 
-            return render(request, "simplex_form.html", {
-                "num_vars": num_vars,
-                "num_constraints": num_constraints,
-                "optimization": optimization,
-            })
-        else:
-            # Step 3: Solve the problem
-            num_vars = int(request.POST.get("num_vars"))
-            num_constraints = int(request.POST.get("num_constraints"))
-            optimization = request.POST.get("optimization")
+                <!-- Number of Constraints -->
+                <div>
+                    <label for="num_constraints" class="block text-sm font-medium text-gray-700">Number of Constraints</label>
+                    <input type="number" id="num_constraints" name="num_constraints" min="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                </div>
 
-            c = [float(request.POST.get(f"c{i+1}")) for i in range(num_vars)]
-            A = [[float(request.POST.get(f"a{i+1}_{j+1}")) for j in range(num_vars)] for i in range(num_constraints)]
-            b = [float(request.POST.get(f"b{i+1}")) for i in range(num_constraints)]
+                <!-- Optimization Type -->
+                <div class="col-span-2">
+                    <label for="optimization" class="block text-sm font-medium text-gray-700">Optimization</label>
+                    <select id="optimization" name="optimization" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <option value="maximize">Maximize</option>
+                        <option value="minimize">Minimize</option>
+                    </select>
+                </div>
+            </div>
 
-            c = np.array(c)
-            A = np.array(A)
-            b = np.array(b)
+            <!-- Constraints Inputs -->
+            <div x-for="(constraint, index) in constraints" :key="index" class="mt-4 space-y-2">
+                <div class="grid grid-cols-4 gap-4">
+                    <div>
+                        <input type="number" name="constraint_var1" x-model="constraint.var1" placeholder="x1" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <input type="number" name="constraint_var2" x-model="constraint.var2" placeholder="x2" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <input type="text" name="constraint_operator" placeholder="<, =, >" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <input type="number" name="constraint_value" placeholder="Value" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+            </div>
 
-            if optimization == "minimize":
-                c = -c
+            <!-- Add More Constraints Button -->
+            <div class="mt-2">
+                <button type="button" @click="constraints.push({ var1: '', var2: '' })" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                    Add Constraint
+                </button>
+            </div>
 
-            solution, optimal_value = simplex(c, A, b)
-
-            if optimization == "minimize":
-                optimal_value = -optimal_value
-
-            return render(request, "simplex_result.html", {
-                "solution": solution,
-                "optimal_value": optimal_value,
-            })
-
-    return render(request, "simplex_initial.html")
+            <!-- Submit Button -->
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

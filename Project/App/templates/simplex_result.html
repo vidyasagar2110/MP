@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simplex Result</title>
+    <title>Simplex Results</title>
 </head>
 <body>
-    <h1>Simplex Method Result</h1>
-    <p><strong>Optimal Solution:</strong> {{ solution }}</p>
-    <p><strong>Optimal Value:</strong> {{ optimal_value }}</p>
-    <a href="{% url 'simplex_solver' %}">Solve Another Problem</a>
+    <h1>Simplex Method Results</h1>
+    <p>Number of Variables: {{ num_vars }}</p>
+    <p>Number of Constraints: {{ num_constraints }}</p>
+    <p>Optimization: {{ optimization }}</p>
+    <p>{{ message }}</p>
 </body>
 </html>

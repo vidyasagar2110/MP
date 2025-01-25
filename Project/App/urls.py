@@ -14,6 +14,7 @@ urlpatterns = [
     # Simplex Method
     path('simplex/', views.simplex_method, name='simplex_method'),
     path('simplex/steps/', views.simplex_steps, name='simplex_steps'),
-    path('simplex/solve/', views.simplex_solver, name='simplex_solver'),  # Updated to avoid conflict
+    path('simplex/solve/', views.simplex_solve, name='simplex_solve'),  # Correctly mapped to simplex_solve view
     path('simplex/application/', views.simplex_application, name='simplex_application'),
+    path('simplex/solver/', views.simplex_solver, name='simplex_solver'),  # For solving problems
 ]

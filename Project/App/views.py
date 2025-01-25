@@ -27,16 +27,19 @@ def simplex_solve(request):
 def simplex_application(request):
     return render(request, 'simplex_application.html')
 
+from django.shortcuts import render
+from django.http import HttpResponse
+
 def simplex_solver(request):
     if request.method == "POST":
         num_vars = int(request.POST.get("num_vars"))
         num_constraints = int(request.POST.get("num_constraints"))
         optimization = request.POST.get("optimization")  # Maximize or Minimize
 
-        # Parse objective function coefficients
+        # Parse objective function coefficients (c1, c2, ..., cn)
         c = [float(request.POST.get(f"c{i+1}")) for i in range(num_vars)]
 
-        # Parse constraints
+        # Parse constraints (a1_1, a1_2, ..., a1_n, b1, a2_1, ..., b2, ...)
         A = []
         b = []
         for i in range(num_constraints):
